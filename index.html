@@ -5,374 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>abdalla-abdelhameid-portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-
-:root{
-  --bg:#07070f;--bg2:#0d0d1a;--surface:#12121f;--surface2:#1a1a2e;
-  --border:rgba(99,102,241,0.15);--border2:rgba(99,102,241,0.3);
-  --accent:#6366f1;--accent2:#818cf8;--accent3:#c7d2fe;
-  --neon:#39ff14;--neon2:#00f5ff;--neon3:#bf5af2;--neon4:#ff6b6b;
-  --text:#e2e8f0;--muted:#94a3b8;--dim:#475569;--green:#34d399;
-  --mono:'JetBrains Mono',monospace;
-}
-[data-theme="light"]{
-  --bg:#f1f3fb;--bg2:#e8ebf8;--surface:#ffffff;--surface2:#eef0fa;
-  --border:rgba(67,56,202,0.2);--border2:rgba(67,56,202,0.38);
-  --accent:#4338ca;--accent2:#4f46e5;--accent3:#3730a3;
-  --neon:#15803d;--neon2:#0e7490;--neon3:#7c3aed;--neon4:#dc2626;
-  --text:#0f172a;--muted:#1e293b;--dim:#475569;--green:#059669;
-}
-[data-theme="light"] .hero-grid{background-image:linear-gradient(rgba(67,56,202,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(67,56,202,0.06) 1px,transparent 1px)}
-[data-theme="light"] .info-card{background:#fff;border-color:rgba(67,56,202,0.2)}
-[data-theme="light"] .info-card-hdr{background:rgba(67,56,202,0.06)}
-[data-theme="light"] .skill-track{background:#e0e3f5;border-color:rgba(67,56,202,0.15)}
-[data-theme="light"] .proj-card,[data-theme="light"] .proj-locked{background:#fff;border-color:rgba(67,56,202,0.2)}
-[data-theme="light"] .glass-box{background:rgba(67,56,202,0.06);border-color:rgba(67,56,202,0.2)}
-[data-theme="light"] .clink{background:#fff;border-color:rgba(67,56,202,0.2)}
-[data-theme="light"] .fi,[data-theme="light"] .fta{background:#fff;border-color:rgba(67,56,202,0.2);color:#0f172a}
-[data-theme="light"] .stack-flex-box{background:rgba(14,116,144,0.05);border-color:rgba(14,116,144,0.25)}
-[data-theme="light"] .tl-item::before{background:#4338ca}
-[data-theme="light"] .timeline::before{background:linear-gradient(to bottom,#4338ca,transparent)}
-[data-theme="light"] .neon-track{background:rgba(67,56,202,0.12)}
-[data-theme="light"] nav{background:rgba(241,243,251,0.92)}
-[data-theme="light"] .ficon{background:#fff;border-color:rgba(67,56,202,0.2)}
-
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:var(--mono);line-height:1.6;overflow-x:hidden;transition:background 0.3s,color 0.3s}
-
-#particles-canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.4}
-[data-theme="light"] #particles-canvas{opacity:0.5}
-
-::-webkit-scrollbar{width:3px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
-
-/* ── NAV ── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:9999;
-  display:flex;justify-content:space-between;align-items:center;
-  padding:0.9rem 3rem;
-  background:rgba(7,7,15,0.88);backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);transition:background 0.3s;
-}
-[data-theme="light"] nav{background:rgba(240,242,252,0.9)}
-.nav-logo{font-size:0.82rem;color:var(--accent2);letter-spacing:0.08em}
-.nav-logo span{color:var(--dim)}
-.nav-right{display:flex;align-items:center;gap:1.5rem}
-.nav-links{display:flex;gap:1.8rem}
-.nav-links a{
-  font-size:0.75rem;color:var(--muted);text-decoration:none;
-  letter-spacing:0.08em;transition:color 0.2s;position:relative;padding-bottom:3px;
-}
-.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--accent2);transition:width 0.25s}
-.nav-links a:hover,.nav-links a.active{color:var(--accent2)}
-.nav-links a.active::after,.nav-links a:hover::after{width:100%}
-.nav-cv{
-  display:inline-flex;align-items:center;gap:5px;
-  font-size:0.72rem;color:var(--accent2);
-  background:rgba(99,102,241,0.08);border:1px solid var(--border2);
-  padding:4px 12px;border-radius:4px;text-decoration:none;
-  transition:background 0.2s;
-}
-.nav-cv:hover{background:rgba(99,102,241,0.18)}
-.theme-toggle{
-  background:var(--surface);border:1px solid var(--border2);
-  border-radius:20px;padding:3px;display:flex;align-items:center;gap:2px;
-}
-.theme-btn{
-  width:24px;height:24px;border-radius:12px;display:flex;align-items:center;
-  justify-content:center;font-size:12px;cursor:pointer;border:none;background:transparent;transition:background 0.2s;
-}
-.theme-btn.active{background:var(--accent)}
-
-/* ── HERO ── */
-#hero{
-  min-height:100vh;display:flex;align-items:center;
-  padding:5.5rem 3rem 3rem;position:relative;overflow:hidden;
-}
-.hero-grid{
-  position:absolute;inset:0;
-  background-image:linear-gradient(rgba(99,102,241,0.035) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,0.035) 1px,transparent 1px);
-  background-size:55px 55px;
-}
-.hero-glow{
-  position:absolute;width:500px;height:500px;border-radius:50%;
-  background:radial-gradient(circle,rgba(99,102,241,0.09) 0%,transparent 70%);
-  top:-120px;right:-80px;pointer-events:none;
-}
-.hero-wrap{position:relative;max-width:1000px;margin:0 auto;width:100%}
-.hero-inner{display:flex;align-items:center;justify-content:space-between;gap:3rem}
-.hero-text{flex:1;min-width:0}
-
-.hero-badge{
-  display:inline-flex;align-items:center;gap:7px;
-  font-size:0.72rem;color:var(--accent2);
-  background:rgba(99,102,241,0.08);border:1px solid var(--border2);
-  padding:5px 13px;border-radius:20px;margin-bottom:1.8rem;letter-spacing:0.09em;
-}
-.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 2s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
-
-.hero-name{
-  font-size:clamp(2.5rem,5vw,4.5rem);font-weight:700;
-  line-height:1.05;letter-spacing:-0.03em;color:var(--text);margin-bottom:0.6rem;
-  white-space:nowrap;
-}
-.hero-role{font-size:0.9rem;color:var(--accent2);margin-bottom:1.4rem;letter-spacing:0.04em}
-.hero-role::before{content:'> ';color:var(--dim)}
-.hero-bio{font-size:0.84rem;color:var(--muted);max-width:500px;line-height:1.9;margin-bottom:2rem}
-.hero-bio strong{color:var(--neon2)}
-
-.hero-btns{display:flex;gap:0.75rem;flex-wrap:wrap}
-.btn-p{
-  display:inline-flex;align-items:center;gap:7px;
-  background:var(--accent);color:#fff;font-family:var(--mono);
-  font-size:0.78rem;font-weight:500;padding:0.65rem 1.3rem;border-radius:5px;
-  text-decoration:none;letter-spacing:0.05em;border:none;cursor:pointer;
-  transition:background 0.2s,transform 0.15s;
-}
-.btn-p:hover{background:var(--accent2);transform:translateY(-2px)}
-.btn-g{
-  display:inline-flex;align-items:center;gap:7px;
-  background:transparent;color:var(--muted);font-family:var(--mono);
-  font-size:0.78rem;padding:0.65rem 1.3rem;border-radius:5px;
-  border:1px solid var(--border2);text-decoration:none;
-  letter-spacing:0.05em;transition:all 0.2s;cursor:pointer;
-}
-.btn-g:hover{color:var(--accent2);border-color:var(--accent);transform:translateY(-2px)}
-
-.hero-stats{
-  display:flex;gap:2rem;margin-top:2.5rem;
-  padding-top:1.8rem;border-top:1px solid var(--border);
-}
-.stat-num{font-size:1.3rem;font-weight:700;color:var(--accent2);display:block}
-.stat-label{font-size:0.64rem;color:var(--dim);letter-spacing:0.1em}
-
-/* photo */
-.hero-photo{flex-shrink:0}
-.hero-photo-circle{
-  width:220px;height:220px;border-radius:50%;overflow:hidden;
-  border:2px solid var(--border2);position:relative;flex-shrink:0;
-  background:var(--surface2);
-  display:flex;align-items:center;justify-content:center;
-}
-.hero-photo-circle img{
-  width:100%;height:100%;
-  object-fit:cover;object-position:center top;
-  display:block;border-radius:50%;
-}
-.hero-photo-circle::after{
-  content:'';position:absolute;inset:0;border-radius:50%;
-  background:linear-gradient(to bottom,transparent 60%,rgba(7,7,15,0.4));
-  pointer-events:none;
-}
-
-/* ── WRAPPER for all sections ── */
-.wrap{max-width:1000px;margin:0 auto;width:100%}
-
-/* ── SECTIONS ── */
-section{padding:5rem 3rem;position:relative;z-index:1}
-.sec-hdr{display:flex;align-items:center;gap:1rem;margin-bottom:3rem}
-.sec-num{font-size:0.72rem;color:var(--accent);letter-spacing:0.1em}
-.sec-title{font-size:1.65rem;font-weight:700;letter-spacing:-0.02em}
-.sec-line{flex:1;height:1px;background:var(--border)}
-
-/* ── ABOUT ── */
-#about{background:var(--bg2)}
-.about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:3.5rem;align-items:start}
-.about-text p{color:var(--muted);font-size:0.85rem;line-height:1.9;margin-bottom:1.1rem}
-.about-text p strong{color:var(--accent2);font-weight:600}
-.info-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden}
-.info-card-hdr{padding:0.7rem 1.1rem;background:rgba(99,102,241,0.05);border-bottom:1px solid var(--border);font-size:0.68rem;color:var(--dim);letter-spacing:0.1em}
-.info-row{display:flex;justify-content:space-between;align-items:center;padding:0.6rem 1.1rem;border-bottom:1px solid var(--border);font-size:0.79rem}
-.info-row:last-child{border-bottom:none}
-.info-k{color:var(--dim);font-size:0.68rem;letter-spacing:0.05em;min-width:75px}
-.info-v{color:var(--text);font-size:0.79rem;text-align:right}
-.info-v a{color:var(--accent2);text-decoration:none}
-.info-v a:hover{color:var(--accent3)}
-
-/* ── SKILLS ── */
-#skills{background:var(--bg)}
-.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
-.skill-grp-lbl{font-size:0.66rem;color:var(--dim);letter-spacing:0.12em;margin-bottom:1.2rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border)}
-
-.skill-item{margin-bottom:1.2rem}
-.skill-hdr{display:flex;justify-content:space-between;margin-bottom:6px}
-.skill-name{font-size:0.8rem;color:var(--text);font-weight:500}
-.skill-pct{font-size:0.7rem;color:var(--accent2)}
-.skill-track{height:4px;background:var(--surface2);border-radius:2px;overflow:hidden;border:1px solid var(--border)}
-.skill-fill{height:100%;border-radius:2px;width:0;background:linear-gradient(90deg,var(--accent),var(--neon2));transition:width 1.3s cubic-bezier(0.4,0,0.2,1)}
-
-.ntags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:1.8rem}
-.nt{font-size:0.7rem;padding:4px 11px;border-radius:4px;letter-spacing:0.04em;border:1px solid;transition:box-shadow 0.2s,transform 0.2s;cursor:default}
-.nt:hover{transform:translateY(-1px)}
-.nt1{color:var(--neon);border-color:rgba(57,255,20,0.25);background:rgba(57,255,20,0.05)}
-.nt1:hover{box-shadow:0 0 8px rgba(57,255,20,0.3)}
-.nt2{color:var(--neon2);border-color:rgba(0,245,255,0.25);background:rgba(0,245,255,0.05)}
-.nt2:hover{box-shadow:0 0 8px rgba(0,245,255,0.3)}
-.nt3{color:var(--neon3);border-color:rgba(191,90,242,0.25);background:rgba(191,90,242,0.05)}
-.nt3:hover{box-shadow:0 0 8px rgba(191,90,242,0.3)}
-.nt4{color:var(--neon4);border-color:rgba(255,107,107,0.25);background:rgba(255,107,107,0.05)}
-.nt4:hover{box-shadow:0 0 8px rgba(255,107,107,0.3)}
-
-.stack-flex-box{margin-top:1.5rem;background:rgba(0,245,255,0.04);border:1px solid rgba(0,245,255,0.18);border-radius:6px;padding:1rem}
-.stack-flex-box .skill-grp-lbl{border-bottom:none;margin-bottom:0.5rem}
-.stack-flex-box p{font-size:0.8rem;color:var(--neon2);line-height:1.7}
-.stack-flex-box span{color:var(--text)}
-
-/* ── EXPERIENCE ── */
-#experience{background:var(--bg2)}
-.timeline{position:relative;padding-left:1.8rem}
-.timeline::before{content:'';position:absolute;left:0;top:8px;bottom:0;width:1px;background:linear-gradient(to bottom,var(--accent),transparent)}
-.tl-item{position:relative;padding-bottom:2.5rem}
-.tl-item::before{content:'';position:absolute;left:-2.2rem;top:6px;width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(99,102,241,0.2)}
-.tl-date{font-size:0.7rem;color:var(--accent);letter-spacing:0.1em;margin-bottom:0.4rem}
-.tl-title{font-size:0.95rem;font-weight:700;color:var(--text);margin-bottom:0.2rem}
-.tl-place{font-size:0.75rem;color:var(--muted);margin-bottom:0.7rem}
-.tl-desc{font-size:0.82rem;color:var(--dim);line-height:1.8;max-width:540px}
-
-/* ── PROJECTS ── */
-#projects{background:var(--bg)}
-.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.3rem}
-.proj-card{
-  background:var(--surface);border:1px solid var(--border);border-radius:8px;
-  padding:1.5rem;position:relative;overflow:hidden;
-  transition:border-color 0.2s,transform 0.2s;
-}
-.proj-card:hover{border-color:var(--border2);transform:translateY(-3px)}
-.proj-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--neon2));transform:scaleX(0);transform-origin:left;transition:transform 0.3s}
-.proj-card:hover::before{transform:scaleX(1)}
-.proj-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.9rem}
-.proj-badge{font-size:0.67rem;color:var(--accent2);background:rgba(99,102,241,0.08);border:1px solid var(--border2);padding:3px 9px;border-radius:3px}
-.proj-links{display:flex;gap:6px}
-.proj-link{width:26px;height:26px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border2);border-radius:4px;color:var(--dim);text-decoration:none;transition:color 0.2s,border-color 0.2s}
-.proj-link:hover{color:var(--accent2);border-color:var(--accent)}
-.proj-name{font-size:0.95rem;font-weight:700;color:var(--text);margin-bottom:0.5rem}
-.proj-desc{font-size:0.8rem;color:var(--muted);line-height:1.75;margin-bottom:1rem}
-.proj-stack{display:flex;flex-wrap:wrap;gap:5px}
-.stag{font-size:0.65rem;color:var(--dim);border:1px solid var(--border);padding:2px 7px;border-radius:3px;letter-spacing:0.04em}
-
-/* locked card */
-.proj-locked{background:var(--surface);border:1px solid rgba(99,102,241,0.22);border-radius:8px;padding:1.5rem;position:relative;overflow:hidden;transition:border-color 0.2s,transform 0.2s}
-.proj-locked:hover{border-color:rgba(99,102,241,0.45);transform:translateY(-3px)}
-
-.glass-box{
-  position:relative;overflow:hidden;width:100%;height:150px;
-  border-radius:7px;margin-bottom:1rem;
-  background:rgba(99,102,241,0.05);
-  border:1px solid rgba(99,102,241,0.18);cursor:crosshair;
-}
-.glass-inner{
-  position:absolute;inset:0;
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  display:flex;align-items:center;justify-content:center;z-index:1;
-}
-.glass-icon{filter:drop-shadow(0 0 8px rgba(99,102,241,0.8))}
-.bokeh{position:absolute;border-radius:50%;pointer-events:none;opacity:0;filter:blur(20px);transition:opacity 0.35s;z-index:0}
-.glass-box:hover .bokeh{opacity:1}
-.b1{width:90px;height:90px;background:rgba(99,102,241,0.55);top:5%;left:10%;animation:bf1 4s ease-in-out infinite}
-.b2{width:65px;height:65px;background:rgba(0,245,255,0.5);top:35%;right:12%;animation:bf2 3.5s ease-in-out infinite}
-.b3{width:80px;height:80px;background:rgba(191,90,242,0.5);bottom:5%;left:35%;animation:bf3 5s ease-in-out infinite}
-.b4{width:50px;height:50px;background:rgba(57,255,20,0.35);top:10%;right:30%;animation:bf1 3s ease-in-out infinite reverse}
-.b5{width:45px;height:45px;background:rgba(0,245,255,0.4);bottom:15%;left:5%;animation:bf2 4.5s ease-in-out infinite reverse}
-.b6{width:60px;height:60px;background:rgba(255,107,107,0.3);top:50%;right:5%;animation:bf3 3.8s ease-in-out infinite}
-@keyframes bf1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(10px,-9px) scale(1.1)}}
-@keyframes bf2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-9px,8px) scale(0.9)}}
-@keyframes bf3{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(7px,-11px) scale(1.05)}66%{transform:translate(-7px,6px) scale(0.95)}}
-
-.glass-follow{
-  position:absolute;width:130px;height:130px;border-radius:50%;pointer-events:none;
-  background:radial-gradient(circle,rgba(255,255,255,0.45) 0%,rgba(0,245,255,0.45) 25%,rgba(99,102,241,0.3) 55%,transparent 72%);
-  transform:translate(-50%,-50%);filter:blur(12px);opacity:0;z-index:2;
-}
-
-/* loading bar */
-.loading-bar-wrap{display:flex;align-items:center;gap:10px;margin-bottom:0.8rem}
-.loading-label{font-size:0.67rem;color:var(--neon2);letter-spacing:0.1em;white-space:nowrap}
-.neon-track{flex:1;height:3px;border-radius:2px;background:rgba(99,102,241,0.12);position:relative;overflow:hidden}
-.neon-car{position:absolute;top:50%;left:-60px;transform:translateY(-50%);animation:car 2.2s linear infinite;display:flex;align-items:center}
-.neon-car::before{content:'';display:block;width:40px;height:3px;border-radius:2px;background:linear-gradient(90deg,transparent,var(--neon2),rgba(99,102,241,0.9));box-shadow:0 0 6px var(--neon2)}
-.neon-dot{width:5px;height:5px;border-radius:50%;background:#fff;box-shadow:0 0 4px var(--neon2),0 0 8px var(--neon2);margin-left:-2px;flex-shrink:0}
-@keyframes car{0%{left:-60px}100%{left:calc(100% + 10px)}}
-.publishing{font-size:0.7rem;color:var(--muted);letter-spacing:0.05em;white-space:nowrap}
-
-/* ── CONTACT ── */
-#contact{background:var(--bg2)}
-.contact-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:3.5rem;align-items:start}
-.contact-head{font-size:1.8rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:0.8rem}
-.contact-sub{font-size:0.83rem;color:var(--muted);line-height:1.8;margin-bottom:1.8rem}
-.clinks{display:flex;flex-direction:column;gap:0.65rem}
-.clink{
-  display:flex;align-items:center;gap:9px;
-  background:var(--surface);border:1px solid var(--border);border-radius:6px;
-  padding:0.65rem 1rem;text-decoration:none;color:var(--muted);font-size:0.76rem;
-  letter-spacing:0.04em;transition:all 0.2s;
-}
-.clink:hover{color:var(--accent2);border-color:var(--accent);transform:translateX(4px)}
-.clink svg{width:13px;height:13px;flex-shrink:0}
-
-.cform{display:flex;flex-direction:column;gap:0.9rem}
-.frow{display:grid;grid-template-columns:1fr 1fr;gap:0.9rem}
-.ff{display:flex;flex-direction:column;gap:5px}
-.fl{font-size:0.66rem;color:var(--dim);letter-spacing:0.1em}
-.fi,.fta{
-  background:var(--surface);border:1px solid var(--border);border-radius:4px;
-  padding:0.62rem 0.9rem;color:var(--text);font-family:var(--mono);
-  font-size:0.79rem;outline:none;transition:border-color 0.2s;width:100%;
-}
-.fi:focus,.fta:focus{border-color:var(--accent)}
-.fta{resize:vertical;min-height:105px}
-.fi::placeholder,.fta::placeholder{color:var(--dim)}
-.fsub{
-  display:inline-flex;align-items:center;gap:7px;
-  background:var(--accent);color:#fff;font-family:var(--mono);
-  font-size:0.78rem;font-weight:500;padding:0.72rem 1.5rem;
-  border-radius:5px;border:none;cursor:pointer;letter-spacing:0.05em;
-  transition:background 0.2s,transform 0.15s;align-self:flex-start;
-}
-.fsub:hover{background:var(--accent2);transform:translateY(-1px)}
-.fsub:disabled{opacity:0.5;cursor:not-allowed;transform:none}
-.fmsg{font-size:0.76rem;padding:0.55rem 0.9rem;border-radius:4px;display:none}
-.fmsg.ok{display:block;background:rgba(52,211,153,0.08);color:#34d399;border:1px solid rgba(52,211,153,0.22)}
-.fmsg.err{display:block;background:rgba(239,68,68,0.08);color:#f87171;border:1px solid rgba(239,68,68,0.22)}
-
-/* ── FOOTER ── */
-footer{background:var(--bg);padding:1.2rem 3rem;border-top:1px solid var(--border);position:relative;z-index:1}
-.footer-inner{max-width:1000px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
-.fcopy{font-size:0.7rem;color:var(--dim);letter-spacing:0.05em}
-.fcopy span{color:var(--accent2)}
-.footer-icons{display:flex;align-items:center;gap:0.5rem}
-.ficon{
-  width:30px;height:30px;display:flex;align-items:center;justify-content:center;
-  border:1px solid var(--border);border-radius:5px;color:var(--dim);text-decoration:none;
-  transition:color 0.2s,border-color 0.2s,transform 0.15s;
-}
-.ficon:hover{color:var(--accent2);border-color:var(--accent);transform:translateY(-2px)}
-.ficon svg{width:13px;height:13px}
-
-/* ── RESPONSIVE ── */
-@media(max-width:800px){
-  nav{padding:0.9rem 1.5rem}
-  .nav-links{display:none}
-  section{padding:4rem 1.5rem}
-  #hero{padding:5rem 1.5rem 3rem}
-  .hero-inner{flex-direction:column-reverse;gap:2rem;align-items:flex-start}
-  .hero-name{white-space:normal;font-size:2.3rem}
-  .hero-photo-circle{width:130px;height:130px;align-self:center}
-  .about-grid,.skills-grid,.contact-grid{grid-template-columns:1fr;gap:2rem}
-  .frow{grid-template-columns:1fr}
-  .footer-inner{flex-direction:column;gap:0.75rem;text-align:center}
-}
-</style>
+<link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-<script>function setTheme(t){document.body.setAttribute('data-theme',t==='light'?'light':'');var d=document.getElementById('btn-dark'),l=document.getElementById('btn-light');if(d)d.classList.toggle('active',t==='dark');if(l)l.classList.toggle('active',t==='light');localStorage.setItem('theme',t);}if(localStorage.getItem('theme')==='light')setTheme('light');</script>
 <canvas id="particles-canvas"></canvas>
-
-<!-- NAV -->
 <nav>
-  <div class="nav-logo"><img src="Logo.png" alt="AA" style="height:36px;width:auto;display:block;object-fit:contain"/></div>
+  <div class="nav-logo"><span>//</span> abdalla.dev</div>
   <div class="nav-right">
     <div class="nav-links">
       <a href="#about">about</a>
@@ -391,8 +29,6 @@ footer{background:var(--bg);padding:1.2rem 3rem;border-top:1px solid var(--borde
     </div>
   </div>
 </nav>
-
-<!-- HERO -->
 <section id="hero">
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
@@ -402,24 +38,11 @@ footer{background:var(--bg);padding:1.2rem 3rem;border-top:1px solid var(--borde
         <div class="hero-badge"><span class="badge-dot"></span>Available for opportunities</div>
         <h1 class="hero-name">Abdalla Abdelhameid</h1>
         <p class="hero-role">.NET Backend Developer</p>
-        <p class="hero-bio">
-          Junior software engineer specialized in building robust backend systems with C#, ASP.NET Core, and Entity Framework Core.
-          Strong foundation in OOP, Data Structures, and Algorithms —
-          <strong>fast learner who can pick up any stack beyond .NET quickly.</strong>
-        </p>
+        <p class="hero-bio">Junior software engineer specialized in building robust backend systems with C#, ASP.NET Core, and Entity Framework Core. Strong foundation in OOP, Data Structures, and Algorithms — <strong>fast learner who can pick up any stack beyond .NET quickly.</strong></p>
         <div class="hero-btns">
-          <a href="#projects" class="btn-g">
-            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-            View Projects
-          </a>
-          <a href="#contact" class="btn-g">
-            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
-            Get In Touch
-          </a>
-          <a href="Abdalla_CV.pdf" download class="btn-g">
-            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Download CV
-          </a>
+          <a href="#projects" class="btn-g"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>View Projects</a>
+          <a href="#contact" class="btn-g"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>Get In Touch</a>
+          <a href="Abdalla_CV.pdf" download class="btn-g"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download CV</a>
         </div>
         <div class="hero-stats">
           <div><span class="stat-num">C#</span><span class="stat-label">PRIMARY</span></div>
@@ -428,15 +51,11 @@ footer{background:var(--bg);padding:1.2rem 3rem;border-top:1px solid var(--borde
         </div>
       </div>
       <div class="hero-photo">
-        <div class="hero-photo-circle">
-          <img src="photo.jpeg" alt="Abdalla Abdelhameid"/>
-        </div>
+        <div class="hero-photo-circle"><img src="photo.jpeg" alt="Abdalla Abdelhameid"/></div>
       </div>
     </div>
   </div>
 </section>
-
-<!-- ABOUT -->
 <section id="about">
   <div class="wrap">
     <div class="sec-hdr"><span class="sec-num">01.</span><h2 class="sec-title">About Me</h2><div class="sec-line"></div></div>
@@ -444,7 +63,7 @@ footer{background:var(--bg);padding:1.2rem 3rem;border-top:1px solid var(--borde
       <div class="about-text">
         <p>Junior <strong>.NET Backend Developer</strong> with a strong foundation in C++, C#, Object-Oriented Programming, Data Structures, and Algorithms.</p>
         <p>Hands-on experience with <strong>ASP.NET Core</strong>, <strong>Entity Framework Core</strong>, and <strong>LINQ</strong> — gained through academic and personal projects. I write clean, maintainable, efficient code focused on backend architecture.</p>
-        <p>Not limited to .NET — I can <strong>pick up any stack fast</strong>. Strong fundamentals make switching to Node.js, Django, Spring or anything else straightforward. I adapt quickly and deliver.</p>
+        <p>Not limited to .NET — I can <strong>pick up any stack fast</strong>. Strong fundamentals make switching to Node.js, Django, Spring or anything else straightforward.</p>
       </div>
       <div>
         <div class="info-card">
@@ -453,7 +72,7 @@ footer{background:var(--bg);padding:1.2rem 3rem;border-top:1px solid var(--borde
           <div class="info-row"><span class="info-k">LOCATION</span><span class="info-v">Cairo, Egypt</span></div>
           <div class="info-row"><span class="info-k">UNIVERSITY</span><span class="info-v">Zagazig University — CS</span></div>
           <div class="info-row"><span class="info-k">FOCUS</span><span class="info-v">.NET Backend</span></div>
-          <div class="info-row"><span class="info-k">EMAIL</span><span class="info-v"><a href="/cdn-cgi/l/email-protection#2f4e4d4b4e43434e01495d4a4a434e414c4a5d1d186f48424e4643014c4042"><span class="__cf_email__" data-cfemail="88e9eaece9e4e4e9a6eefaedede4e9e6ebedfababfc8efe5e9e1e4a6ebe7e5">[email&#160;protected]</span></a></span></div>
+          <div class="info-row"><span class="info-k">EMAIL</span><span class="info-v"><a id="emaillink" href="#">abdalla.freelancer27@gmail.com</a></span></div>
           <div class="info-row"><span class="info-k">LINKEDIN</span><span class="info-v"><a href="https://linkedin.com/in/abdalla-abdelhameid" target="_blank">abdalla-abdelhameid</a></span></div>
           <div class="info-row"><span class="info-k">GITHUB</span><span class="info-v"><a href="https://github.com/abdalla0abdelhamid" target="_blank">abdalla0abdelhamid</a></span></div>
           <div class="info-row"><span class="info-k">LANGUAGES</span><span class="info-v">Arabic · English</span></div>
@@ -462,14 +81,12 @@ footer{background:var(--bg);padding:1.2rem 3rem;border-top:1px solid var(--borde
     </div>
   </div>
 </section>
-
-<!-- SKILLS -->
 <section id="skills">
   <div class="wrap">
     <div class="sec-hdr"><span class="sec-num">02.</span><h2 class="sec-title">Technical Skills</h2><div class="sec-line"></div></div>
     <div class="skills-grid">
       <div>
-        <div class="skill-grp-lbl">// languages & frameworks</div>
+        <div class="skill-grp-lbl">// languages &amp; frameworks</div>
         <div class="skill-item"><div class="skill-hdr"><span class="skill-name">C++</span><span class="skill-pct">90%</span></div><div class="skill-track"><div class="skill-fill" data-w="90%"></div></div></div>
         <div class="skill-item"><div class="skill-hdr"><span class="skill-name">C#</span><span class="skill-pct">85%</span></div><div class="skill-track"><div class="skill-fill" data-w="85%"></div></div></div>
         <div class="skill-item"><div class="skill-hdr"><span class="skill-name">SQL</span><span class="skill-pct">75%</span></div><div class="skill-track"><div class="skill-fill" data-w="75%"></div></div></div>
@@ -480,22 +97,11 @@ footer{background:var(--bg);padding:1.2rem 3rem;border-top:1px solid var(--borde
       </div>
       <div>
         <div class="skill-grp-lbl">// core concepts</div>
-        <div class="ntags">
-          <span class="nt nt1">OOP</span><span class="nt nt2">Data Structures</span>
-          <span class="nt nt1">Algorithms</span><span class="nt nt3">Clean Code</span>
-          <span class="nt nt2">REST APIs</span><span class="nt nt4">Problem Solving</span>
-          <span class="nt nt3">SOLID Principles</span><span class="nt nt1">Design Patterns</span>
-        </div>
-        <div class="skill-grp-lbl">// tools & platforms</div>
-        <div class="ntags">
-          <span class="nt nt2">Visual Studio</span><span class="nt nt1">SQL Server</span>
-          <span class="nt nt3">Git</span><span class="nt nt4">GitHub</span>
-        </div>
+        <div class="ntags"><span class="nt nt1">OOP</span><span class="nt nt2">Data Structures</span><span class="nt nt1">Algorithms</span><span class="nt nt3">Clean Code</span><span class="nt nt2">REST APIs</span><span class="nt nt4">Problem Solving</span><span class="nt nt3">SOLID Principles</span><span class="nt nt1">Design Patterns</span></div>
+        <div class="skill-grp-lbl">// tools &amp; platforms</div>
+        <div class="ntags"><span class="nt nt2">Visual Studio</span><span class="nt nt1">SQL Server</span><span class="nt nt3">Git</span><span class="nt nt4">GitHub</span></div>
         <div class="skill-grp-lbl">// soft skills</div>
-        <div class="ntags">
-          <span class="nt nt1">Fast Learner</span><span class="nt nt2">Teamwork</span>
-          <span class="nt nt3">Communication</span><span class="nt nt4">Adaptable</span>
-        </div>
+        <div class="ntags"><span class="nt nt1">Fast Learner</span><span class="nt nt2">Teamwork</span><span class="nt nt3">Communication</span><span class="nt nt4">Adaptable</span></div>
         <div class="stack-flex-box">
           <div class="skill-grp-lbl">// stack flexibility</div>
           <p>Not limited to .NET — strong fundamentals in OOP &amp; Algorithms make switching to <span>Node.js, Django, Spring</span> or any stack fast.</p>
@@ -504,106 +110,46 @@ footer{background:var(--bg);padding:1.2rem 3rem;border-top:1px solid var(--borde
     </div>
   </div>
 </section>
-
-<!-- EXPERIENCE -->
 <section id="experience">
   <div class="wrap">
-    <div class="sec-hdr"><span class="sec-num">03.</span><h2 class="sec-title">Experience & Education</h2><div class="sec-line"></div></div>
+    <div class="sec-hdr"><span class="sec-num">03.</span><h2 class="sec-title">Experience &amp; Education</h2><div class="sec-line"></div></div>
     <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-date">NOV 2025 – PRESENT · 5 MOS</div>
-        <div class="tl-title">Back-end .NET Trainee</div>
-        <div class="tl-place">Zag Eng Family · Internship · Hybrid</div>
-        <div class="tl-desc">Training at Zag Eng Family Student Activity as a back-end .NET developer. Working with C#, .NET Framework, ASP.NET, EF Core, LINQ, OOP, and Database design.</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-date">JUN 2024 – PRESENT</div>
-        <div class="tl-title">Advanced .NET Development</div>
-        <div class="tl-place">Self-directed Learning</div>
-        <div class="tl-desc">Deep diving into .NET with C# and SQL Server. Focusing on backend architecture, REST APIs with ASP.NET Core, and data access with Entity Framework Core and LINQ.</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-date">SEP 2023 – JUN 2024</div>
-        <div class="tl-title">Programming Fundamentals Certificate</div>
-        <div class="tl-place">Programming Advices Institution</div>
-        <div class="tl-desc">Mastered programming fundamentals through hundreds of problems and projects using C++, OOP principles, and Data Structures.</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-date">SEP 2023 – PRESENT</div>
-        <div class="tl-title">B.Sc. Computer Science</div>
-        <div class="tl-place">Zagazig University — Cairo, Egypt</div>
-        <div class="tl-desc">Faculty of Science, Dept. of Computer Science and Physics. Core curriculum: algorithms, data structures, databases, and software engineering principles.</div>
-      </div>
+      <div class="tl-item"><div class="tl-date">NOV 2025 – PRESENT · 5 MOS</div><div class="tl-title">Back-end .NET Trainee</div><div class="tl-place">Zag Eng Family · Internship · Hybrid</div><div class="tl-desc">Training at Zag Eng Family Student Activity as a back-end .NET developer. Working with C#, .NET Framework, ASP.NET, EF Core, LINQ, OOP, and Database design.</div></div>
+      <div class="tl-item"><div class="tl-date">JUN 2024 – PRESENT</div><div class="tl-title">Advanced .NET Development</div><div class="tl-place">Self-directed Learning</div><div class="tl-desc">Deep diving into .NET with C# and SQL Server. Focusing on backend architecture, REST APIs with ASP.NET Core, and data access with Entity Framework Core and LINQ.</div></div>
+      <div class="tl-item"><div class="tl-date">SEP 2023 – JUN 2024</div><div class="tl-title">Programming Fundamentals Certificate</div><div class="tl-place">Programming Advices Institution</div><div class="tl-desc">Mastered programming fundamentals through hundreds of problems and projects using C++, OOP principles, and Data Structures.</div></div>
+      <div class="tl-item"><div class="tl-date">SEP 2023 – PRESENT</div><div class="tl-title">B.Sc. Computer Science</div><div class="tl-place">Zagazig University — Cairo, Egypt</div><div class="tl-desc">Faculty of Science, Dept. of Computer Science and Physics. Core curriculum: algorithms, data structures, databases, and software engineering principles.</div></div>
     </div>
   </div>
 </section>
-
-<!-- PROJECTS -->
 <section id="projects">
   <div class="wrap">
     <div class="sec-hdr"><span class="sec-num">04.</span><h2 class="sec-title">Projects</h2><div class="sec-line"></div></div>
     <div class="proj-grid">
-
-      <!-- I'm Noted -->
       <div class="proj-locked">
         <div class="glass-box" id="glassBox">
-          <span class="bokeh b1"></span><span class="bokeh b2"></span>
-          <span class="bokeh b3"></span><span class="bokeh b4"></span>
-          <span class="bokeh b5"></span><span class="bokeh b6"></span>
+          <span class="bokeh b1"></span><span class="bokeh b2"></span><span class="bokeh b3"></span><span class="bokeh b4"></span><span class="bokeh b5"></span><span class="bokeh b6"></span>
           <div class="glass-follow" id="glassFollow"></div>
-          <div class="glass-inner">
-            <svg class="glass-icon" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="rgba(99,102,241,0.85)" stroke-width="1.5">
-              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/>
-              <line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
-            </svg>
-          </div>
+          <div class="glass-inner"><svg class="glass-icon" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="rgba(99,102,241,0.85)" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
         </div>
-        <div class="loading-bar-wrap">
-          <span class="loading-label">// loading</span>
-          <div class="neon-track"><div class="neon-car"><div class="neon-dot"></div></div></div>
-          <span class="publishing">Publishing soon</span>
-        </div>
+        <div class="loading-bar-wrap"><span class="loading-label">// loading</span><div class="neon-track"><div class="neon-car"><div class="neon-dot"></div></div></div><span class="publishing">Publishing soon</span></div>
         <div class="proj-name">I'm Noted</div>
         <div class="proj-desc">A structured knowledge base built from personal study notes — covering the full .NET learning track, converted from Obsidian into a clean navigable website.</div>
-        <div class="proj-stack">
-          <span class="stag">Obsidian</span><span class="stag">Markdown</span><span class="stag">.NET Notes</span>
-        </div>
+        <div class="proj-stack"><span class="stag">Obsidian</span><span class="stag">Markdown</span><span class="stag">.NET Notes</span></div>
       </div>
-
-      <!-- ZagEng E-Commerce — locked -->
       <div class="proj-locked">
         <div class="glass-box" id="glassBox2">
-          <span class="bokeh b1"></span><span class="bokeh b2"></span>
-          <span class="bokeh b3"></span><span class="bokeh b4"></span>
-          <span class="bokeh b5"></span><span class="bokeh b6"></span>
+          <span class="bokeh b1"></span><span class="bokeh b2"></span><span class="bokeh b3"></span><span class="bokeh b4"></span><span class="bokeh b5"></span><span class="bokeh b6"></span>
           <div class="glass-follow" id="glassFollow2"></div>
-          <div class="glass-inner">
-            <svg class="glass-icon" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="rgba(99,102,241,0.85)" stroke-width="1.5">
-              <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-            </svg>
-          </div>
+          <div class="glass-inner"><svg class="glass-icon" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="rgba(99,102,241,0.85)" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div>
         </div>
-        <div class="loading-bar-wrap">
-          <span class="loading-label">// loading</span>
-          <div class="neon-track"><div class="neon-car"><div class="neon-dot"></div></div></div>
-          <span class="publishing">Publishing soon</span>
-        </div>
+        <div class="loading-bar-wrap"><span class="loading-label">// loading</span><div class="neon-track"><div class="neon-car"><div class="neon-dot"></div></div></div><span class="publishing">Publishing soon</span></div>
         <div class="proj-name">ZagEng — E-Commerce</div>
         <div class="proj-desc">E-commerce application built as part of ZagEng Student Activity. Full product catalog, cart, and order management powered by EF Core and LINQ.</div>
-        <div class="proj-stack">
-          <span class="stag">C#</span><span class="stag">EF Core</span>
-          <span class="stag">LINQ</span><span class="stag">SQL Server</span>
-        </div>
+        <div class="proj-stack"><span class="stag">C#</span><span class="stag">EF Core</span><span class="stag">LINQ</span><span class="stag">SQL Server</span></div>
       </div>
-
-
-
     </div>
   </div>
 </section>
-
-<!-- CONTACT -->
 <section id="contact">
   <div class="wrap">
     <div class="sec-hdr"><span class="sec-num">05.</span><h2 class="sec-title">Get In Touch</h2><div class="sec-line"></div></div>
@@ -612,22 +158,10 @@ footer{background:var(--bg);padding:1.2rem 3rem;border-top:1px solid var(--borde
         <h2 class="contact-head">Let's Work Together</h2>
         <p class="contact-sub">Open to backend developer roles, internships, and freelance projects. Fill the form and I'll get back to you.</p>
         <div class="clinks">
-          <a href="/cdn-cgi/l/email-protection#09686b6d68656568276f7b6c6c6568676a6c7b3b3e496e64686065276a6664" class="clink">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
-            Send Mail
-          </a>
-          <a href="https://linkedin.com/in/abdalla-abdelhameid" target="_blank" class="clink">
-            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-            Show My Account
-          </a>
-          <a href="https://wa.me/201271209109" target="_blank" class="clink">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.09 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .94h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7a2 2 0 011.72 2.03z"/></svg>
-            Chat Me Now
-          </a>
-          <a href="https://github.com/abdalla0abdelhamid" target="_blank" class="clink">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.34.72-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.77-1.34-1.77-1.08-.74.08-.73.08-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18.77.84 1.23 1.9 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22v3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3"/></svg>
-            Take a Look
-          </a>
+          <a id="maillink" href="#" class="clink"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>Send Mail</a>
+          <a href="https://linkedin.com/in/abdalla-abdelhameid" target="_blank" class="clink"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>Show My Account</a>
+          <a href="https://wa.me/201271209109" target="_blank" class="clink"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.09 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .94h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7a2 2 0 011.72 2.03z"/></svg>Chat Me Now</a>
+          <a href="https://github.com/abdalla0abdelhamid" target="_blank" class="clink"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.34.72-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.77-1.34-1.77-1.08-.74.08-.73.08-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18.77.84 1.23 1.9 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22v3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3"/></svg>Take a Look</a>
         </div>
       </div>
       <div>
@@ -639,138 +173,23 @@ footer{background:var(--bg);padding:1.2rem 3rem;border-top:1px solid var(--borde
           <div class="ff"><label class="fl">EMAIL *</label><input class="fi" type="email" id="senderEmail" placeholder="your@email.com" required/></div>
           <div class="ff"><label class="fl">MESSAGE *</label><textarea class="fta" id="senderMessage" placeholder="Tell me about the opportunity..." required></textarea></div>
           <div class="fmsg" id="formMsg"></div>
-          <button type="submit" class="fsub" id="submitBtn">
-            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            Send Message
-          </button>
+          <button type="submit" class="fsub" id="submitBtn"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Send Message</button>
         </form>
       </div>
     </div>
   </div>
 </section>
-
-<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <div class="fcopy">© 2025 <span>Abdalla Abdelhameid</span>. All rights reserved.</div>
+    <div class="fcopy">2025 <span>Abdalla Abdelhameid</span>. All rights reserved.</div>
     <div class="footer-icons">
-      <a href="/cdn-cgi/l/email-protection#3c5d5e585d50505d125a4e5959505d525f594e0e0b7c5b515d5550125f5351" class="ficon" title="Email">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
-      </a>
-      <a href="https://wa.me/201271209109" target="_blank" class="ficon" title="WhatsApp">
-        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      </a>
-      <a href="https://linkedin.com/in/abdalla-abdelhameid" target="_blank" class="ficon" title="LinkedIn">
-        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-      </a>
-      <a href="https://github.com/abdalla0abdelhamid" target="_blank" class="ficon" title="GitHub">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.34.72-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.77-1.34-1.77-1.08-.74.08-.73.08-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18.77.84 1.23 1.9 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22v3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3"/></svg>
-      </a>
+      <a id="footermail" href="#" class="ficon" title="Email"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg></a>
+      <a href="https://wa.me/201271209109" target="_blank" class="ficon" title="WhatsApp"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+      <a href="https://linkedin.com/in/abdalla-abdelhameid" target="_blank" class="ficon" title="LinkedIn"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+      <a href="https://github.com/abdalla0abdelhamid" target="_blank" class="ficon" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.34.72-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.77-1.34-1.77-1.08-.74.08-.73.08-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18.77.84 1.23 1.9 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22v3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3"/></svg></a>
     </div>
   </div>
 </footer>
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// ── Active nav on scroll ──
-const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('.nav-links a');
-const navObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if(e.isIntersecting){
-      navLinks.forEach(a => a.classList.remove('active'));
-      const a = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
-      if(a) a.classList.add('active');
-    }
-  });
-}, {rootMargin:'-15% 0px -75% 0px', threshold:0});
-sections.forEach(s => navObs.observe(s));
-
-// ── Skill bars ──
-const fills = document.querySelectorAll('.skill-fill');
-const skillObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if(e.isIntersecting){
-      e.target.style.width = e.target.getAttribute('data-w');
-      skillObs.unobserve(e.target);
-    }
-  });
-}, {threshold:0.2});
-fills.forEach(f => skillObs.observe(f));
-
-// ── Glass box mouse follow ──
-const glassBox = document.getElementById('glassBox');
-const glassFollow = document.getElementById('glassFollow');
-if(glassBox && glassFollow){
-  glassBox.addEventListener('mousemove', e => {
-    const r = glassBox.getBoundingClientRect();
-    glassFollow.style.left = (e.clientX - r.left) + 'px';
-    glassFollow.style.top  = (e.clientY - r.top) + 'px';
-    glassFollow.style.opacity = '1';
-  });
-  glassBox.addEventListener('mouseleave', () => { glassFollow.style.opacity='0'; });
-}
-// glass box 2
-const glassBox2 = document.getElementById('glassBox2');
-const glassFollow2 = document.getElementById('glassFollow2');
-if(glassBox2 && glassFollow2){
-  glassBox2.addEventListener('mousemove', e => {
-    const r = glassBox2.getBoundingClientRect();
-    glassFollow2.style.left = (e.clientX - r.left) + 'px';
-    glassFollow2.style.top  = (e.clientY - r.top) + 'px';
-    glassFollow2.style.opacity = '1';
-  });
-  glassBox2.addEventListener('mouseleave', () => { glassFollow2.style.opacity='0'; });
-}
-
-// ── Meteors & stars ──
-(function(){
-  const c = document.getElementById('particles-canvas');
-  const ctx = c.getContext('2d');
-  let W, H, stars=[], meteors=[];
-  function resize(){ W=c.width=window.innerWidth; H=c.height=window.innerHeight; stars=[]; for(let i=0;i<200;i++) stars.push({x:Math.random()*W,y:Math.random()*H,r:0.5+Math.random()*1.4,o:0.2+Math.random()*0.55,t:Math.random()*Math.PI*2}); }
-  resize(); window.addEventListener('resize', resize);
-  function isDark(){ return document.body.getAttribute('data-theme')!=='light'; }
-  function spawnMeteor(){ const sp=Math.PI/5,v=10+Math.random()*12; return {x:Math.random()*W*1.5-W*0.2,y:-20-Math.random()*80,vx:Math.cos(sp)*v,vy:Math.sin(sp)*v,len:100+Math.random()*140,w:1.2+Math.random()*1.4,op:0,phase:'in',life:0,max:50+Math.random()*35}; }
-  let frame=0;
-  function draw(){
-    ctx.clearRect(0,0,W,H); frame++;
-    const dark=isDark();
-    const sc=dark?'200,200,255':'80,70,200';
-    const mc=dark?'170,150,255':'60,40,190';
-    stars.forEach(s=>{ s.t+=0.012; const o=s.o*(0.6+0.4*Math.sin(s.t)); const r=dark?s.r:s.r*0.7; const fo=dark?o:Math.min(o*0.35,0.25); ctx.beginPath();ctx.arc(s.x,s.y,r,0,Math.PI*2);ctx.fillStyle=`rgba(${sc},${fo})`;ctx.fill(); });
-    if(frame%38===0&&meteors.length<8) meteors.push(spawnMeteor());
-    meteors=meteors.filter(m=>{
-      m.x+=m.vx;m.y+=m.vy;m.life++;
-      if(m.phase==='in'){m.op=Math.min(m.op+0.07,0.9);if(m.op>=0.9)m.phase='hold';}
-      if(m.phase==='hold'&&m.life>m.max*0.6)m.phase='out';
-      if(m.phase==='out')m.op-=0.045;
-      if(m.op<=0||m.x>W+200||m.y>H+200)return false;
-      const tx=m.x-Math.cos(Math.PI/5)*m.len, ty=m.y-Math.sin(Math.PI/5)*m.len;
-      const g=ctx.createLinearGradient(m.x,m.y,tx,ty);
-      const finalOp=dark?m.op:Math.min(m.op*1.4,1);
-      g.addColorStop(0,`rgba(${mc},${finalOp})`);
-      g.addColorStop(0.3,`rgba(${mc},${finalOp*0.4})`);
-      g.addColorStop(1,`rgba(${mc},0)`);
-      ctx.beginPath();ctx.moveTo(m.x,m.y);ctx.lineTo(tx,ty);
-      ctx.strokeStyle=g;ctx.lineWidth=m.w;ctx.lineCap='round';ctx.stroke();
-      ctx.beginPath();ctx.arc(m.x,m.y,m.w*1.3,0,Math.PI*2);
-      ctx.fillStyle=`rgba(${mc},${finalOp*0.95})`;ctx.fill();
-      return true;
-    });
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
-
-// ── Contact form ──
-const API_URL = 'https://YOUR-API-URL/api/contact/send';
-document.getElementById('contactForm').addEventListener('submit', async function(e){
-  e.preventDefault();
-  const btn=document.getElementById('submitBtn'), msg=document.getElementById('formMsg');
-  btn.disabled=true; btn.textContent='Sending...'; msg.className='fmsg';
-  const payload={name:document.getElementById('senderName').value,phone:document.getElementById('senderPhone').value,email:document.getElementById('senderEmail').value,message:document.getElementById('senderMessage').value};
-  try{
-    const res=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-    if(res.ok){msg.className='fmsg ok';msg.textContent='✓ Message sent! I will get back to you soon.';document.getElementById('contactForm').reset();}
-    else throw new Error();
-  
+<script src="main.js"></script>
+</body>
+</html>
